@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/index.css"> 
+</head>
+
+<body class="gradient">
+
+
+    <div >
+        <div id = 'signup'></div>
+    </div>
+    <div>
+        <div id = 'sign-in'></div>
+    </div>
+
+    <!-- component renderer -->
+    <div id="content-area">
+        <!-- Components will load here -->
+        <div id="signup" style="display: none;"></div>
+        <div id="sign-in" style="display: none;"></div>
+    </div>
+
+</body>
+<script>
+    function componentLoad(filePath,compId){
+        fetch(filePath)
+        .then(Response => Response.text())
+        .then(html => {
+            document.getElementById(compId).innerHTML = html;
+        })
+        .catch(err => console.error(`error loding ${filePath}:`,err));
+        
+    }
+
+    componentLoad('./Signup.html','signup');
+    componentLoad('./login.html','sign-in');
+
+
+    // Show Signup and Login functions
+    function showSignup() {
+            document.getElementById('signup').style.display = 'block';
+            document.getElementById('sign-in').style.display = 'none';
+        }
+
+    function showLogin() {
+        document.getElementById('signup').style.display = 'none';
+        document.getElementById('sign-in').style.display = 'block';
+    }
+
+      // Show the login component by default
+      showLogin();
+
+</script>
+</html>
